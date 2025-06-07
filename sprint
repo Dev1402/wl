@@ -1,0 +1,137 @@
+Here’s an **Agile Sprint Plan** for the ForgeLift app, built around a **3-month MVP timeline** with 2-week sprints.
+
+---
+
+## 🧠 Assumptions
+
+* Team:
+
+  * 1 Product Manager
+  * 2 Mobile Developers (React Native)
+  * 2 Backend Engineers
+  * 1 ML Engineer
+  * 1 UX/UI Designer
+  * 1 QA
+
+* MVP Goal:
+  Multi-camera lift analysis + feedback + first version of training plan generator + onboarding
+
+---
+
+## 📅 Sprint Plan (MVP Scope: 6 Sprints, 2 Weeks Each)
+
+### 🔹 Sprint 1: Product Foundation & Infra (Weeks 1–2)
+
+**Goals:**
+
+* Backend scaffolding
+* Mobile camera orchestration POC
+* Define database schema (based on UML)
+* Design onboarding flow
+
+**Deliverables:**
+
+* User registration/login + profile
+* VideoSession + CameraFeed models
+* AR-based 3-camera setup mockup
+* REST API skeleton (FastAPI or similar)
+
+---
+
+### 🔹 Sprint 2: Multi-Camera Recording & Upload (Weeks 3–4)
+
+**Goals:**
+
+* Sync & record from 3 devices
+* Upload to server
+* Auto-merge logic with metadata
+
+**Deliverables:**
+
+* In-app multi-device sync via WebRTC
+* Visual sync marker system (flash or clap detection)
+* Cloud upload + compression pipeline
+* Camera Feed UI with preview
+
+---
+
+### 🔹 Sprint 3: AI Analysis Pipeline (Weeks 5–6)
+
+**Goals:**
+
+* 3D pose estimation from multi-view
+* Bar path extraction
+* Joint-angle & error detection
+
+**Deliverables:**
+
+* ML model integration (pose keypoint inference)
+* Bar path trajectory model
+* First version of fault classifier
+* Feedback generation template (text + GIFs)
+
+---
+
+### 🔹 Sprint 4: Training Plan Engine (Weeks 7–8)
+
+**Goals:**
+
+* Basic rule-based progression logic
+* Connect analysis output to programming logic
+* Weekly plan builder
+
+**Deliverables:**
+
+* TrainingProgram & WeeklyPlan logic
+* Auto-suggestion of drills based on faults
+* Calendar view for upcoming workouts
+* Ability to adjust plans manually
+
+---
+
+### 🔹 Sprint 5: UX Polish & Performance (Weeks 9–10)
+
+**Goals:**
+
+* Improve UX, latency, and visual polish
+* Focus on mobile experience & AR ease-of-use
+* Reduce analysis lag
+
+**Deliverables:**
+
+* On-device pre-inference UI
+* Latency optimization (<12s p95)
+* GIF-based feedback visualizations
+* Interactive error explorer (rep-by-rep timeline)
+
+---
+
+### 🔹 Sprint 6: Testing, Beta Launch Prep (Weeks 11–12)
+
+**Goals:**
+
+* Internal QA
+* Bug fixes and telemetry
+* Closed beta launch for early testers
+
+**Deliverables:**
+
+* Analytics (Mixpanel/Firebase)
+* GDPR-compliant data handling
+* Closed beta launch landing page
+* Onboarding for 50 early testers
+
+---
+
+## ✅ Milestone Checkpoints
+
+| Milestone                                | Date            | Outcome                                    |
+| ---------------------------------------- | --------------- | ------------------------------------------ |
+| **M1** – Infra + multi-cam setup working | End of Sprint 2 | 3-camera recording system live             |
+| **M2** – AI pipeline working end-to-end  | End of Sprint 3 | Analysis results generated on real data    |
+| **M3** – Program builder live            | End of Sprint 4 | First plan auto-generated from form faults |
+| **M4** – Closed beta live                | End of Sprint 6 | 50 real users testing v1 in production     |
+
+---
+
+Would you like a Notion / Trello-style **Kanban board layout**, or a Gantt chart version for visual tracking?
