@@ -1,0 +1,65 @@
+                        +-----------------------------+
+                        |     ForgeLift Mobile App    |
+                        |  (React Native - iOS/Android)|
+                        +-----------------------------+
+                          |      |       |
+       +------------------+      |       +------------------+
+       |                         |                          |
++---------------+     +---------------------+     +---------------------+
+| Camera Module |<--->| Device Sync Service |<--->| AR Calibration Flow |
++---------------+     +---------------------+     +---------------------+
+                          |
+                  +-------------------+
+                  | Upload Manager    |
+                  | (HEVC + chunking) |
+                  +-------------------+
+                          |
+                          v
+               +------------------------+
+               |    Cloud Ingestion     | <-- FastAPI Gateway
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               |   Processing Queue     | <-- Redis / Kafka
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               |  Analysis Engine       |
+               | - 3D Pose Model        |
+               | - Bar Path Tracker     |
+               | - Fault Classifier     |
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               | Feedback Generator     |
+               | - Text + GIF cues      |
+               | - Score & Summary      |
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               | Training Plan Engine   |
+               | - Weekly Progression   |
+               | - Drill Suggestions    |
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               |     User Database      |
+               | (Users, Sessions, Plan)|
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               |  Media Storage (Cloud) |
+               | (Videos, Keypoints)    |
+               +------------------------+
+                          |
+                          v
+               +------------------------+
+               |  Admin + Analytics     |
+               | (Coach tools, Mixpanel)|
+               +------------------------+
