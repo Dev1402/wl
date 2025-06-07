@@ -1,0 +1,152 @@
+# ForgeLift – Weight-Lifting Video Analysis & Training App (PRD v0.2)
+
+> **Updated:** 7 Jun 2025
+> **Change log:** Added mandatory **three-camera** capture flow and related tech / UX updates.
+
+---
+
+## 1 · Internal Press Release (Day 1 Draft)
+
+**FOR IMMEDIATE RELEASE – Singapore · 15 Jan 2026**
+
+### *ForgeLift* Turns Any 3-Camera Phone Setup Into a Personal Weight-Lifting Coach
+
+AI-powered multi-view video analysis delivers instant form feedback and auto-builds a personalised training plan—no wearables required.
+
+> **Singapore, 15 Jan 2026** – Today ForgeOn announces **ForgeLift**, a mobile app that leverages a simple **three-camera** phone setup to analyse weight-lifting technique with biomechanical accuracy, highlight faults frame-by-frame, and dynamically prescribe a tailored training program. Early beta testers improved their form-consistency score by **23 % in four weeks**.
+
+*Problem, Solution, Quotes & CTA remain unchanged from v0.1.*
+
+---
+
+## 2 · Customer & Stakeholder FAQ (delta updates only)
+
+| Area          | Key Q & A                                                                                                                                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **User**      | *What hardware do I need?* – Any three iOS/Android phones capable of 720p @ 60 fps placed at ≈120 ° intervals (front-45°, side-90°, rear-45°). Tripod clamps and a \$15 magnetic sync puck are recommended; in-app AR guides help align cameras. |
+|               | *Why three cameras?* – Multi-view dramatically reduces occlusion errors (joint-angle MAE drops from 5.2° → 2.1°; bar-path 3-D RMS error < 2 mm).                                                                                                 |
+| **Technical** | *How are the feeds synchronised?* – Phones auto-sync via sub-second NTP handshake; visual sync marker (LED flash) provides frame-level alignment with drift < 16 ms.                                                                             |
+|               | *Will single-camera mode still work?* – Yes, but flagged “beta” with lower accuracy and no 3-D joint-moment estimates.                                                                                                                           |
+
+---
+
+## 3 · Detailed Product Requirements (key sections revised)
+
+### 3.3 User Flow (Happy Path, v0.2)
+
+1. **Camera Set-up Wizard** – AR overlay positions three phones; app confirms distance & angle with on-screen prompts.
+2. **Record Set** – All phones auto-record, clap sync occurs, user lifts.
+3. **Upload & Merge** – Feeds are zipped client-side, uploaded, and temporally aligned in the cloud.
+4. **Analysis** (< 12 s p95 for a 15-rep set) – 3-D pose & bar-path reconstruction; form report returned.
+5. Feedback, program update, progress dashboard (unchanged).
+
+### 3.4 Functional Requirements (additions)
+
+| #       | Requirement                                                                                                              | Priority |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ | -------- |
+| **F1a** | **Tri-view camera orchestration**: discover devices via Bluetooth/Wi-Fi, trigger simultaneous recording, manage storage. | Must     |
+| **F2**  | **3-D pose & bar tracking:** stereo/triangulation fusion; auto-calibration every session.                                | Must     |
+| **F3a** | **Camera calibration overlay:** checkerboard AR or floor markers; max set-up time ≤ 90 s.                                | Should   |
+| **F5b** | **3-D corrective drills:** suggestions account for depth-based metrics (e.g., torso angle planes).                       | Should   |
+
+### 3.5 Non-Functional Requirements (updated)
+
+* **Latency:** ≤ 12 s p95 for 3-feed 1080p @ 60 fps set.
+* **Bandwidth:** Max upload ≤ 150 MB per set (HEVC, smart bitrate).
+* **Storage:** Cloud video retention 24 h (keypoints & bar path only thereafter).
+
+### 3.6 Data & ML Pipeline (changes)
+
+* Ingests multi-view data; triangulates 3-D keypoints before fault classification.
+* Model accuracy targets updated: joint-angle MAE ≤ 3°; bar-path RMS ≤ 2 mm.
+
+### 3.7 Tech Stack (delta)
+
+* **Mobile Sync Layer:** WebRTC data-channels for low-latency triggers.
+* **3-D Reconstruction:** OpenVINS-inspired factor-graph backend + GPU-accelerated bundle adjustment.
+
+### 3.8 Dependencies & Risks (additions)
+
+| Area                                      | Risk                      | Mitigation                                                                                     |
+| ----------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------- |
+| User friction in setting up 3 phones      | Abandonment at onboarding | AR overlay & 60-sec tutorial; optional starter kit bundle (2 clip-on phone stands + sync puck) |
+| Bandwidth limits in low-connectivity gyms | Upload fails              | Progressive compression, resume-upload chunks, optional on-device inference (lower accuracy)   |
+
+---
+
+### 4 · Milestones (adjusted)
+
+| Month  | Milestone                                                     |
+| ------ | ------------------------------------------------------------- |
+| **M0** | Scope lock incl. 3-camera POC, starter kit sourcing           |
+| **M2** | Alpha: tri-view synchronisation + deadlift analysis           |
+| **M4** | Beta: 6 lifts, Android parity, logistics for hardware bundle  |
+| **M6** | Public launch (SEA & US) with optional single-camera fallback |
+| **M9** | Coach portal + B2B API pilot (multi-view enabled)             |
+
+---
+
+### 5 · Agile Sprint Plan & Backlog
+
+#### Epics
+
+1. **User Management** – registration, profiles, onboarding questionnaire
+2. **Multi-Camera Recording** – sync logic, AR setup, storage handling
+3. **AI Pipeline** – 3D pose estimation, bar path, fault detection
+4. **Training Program Engine** – feedback logic, weekly plans
+5. **UX & Performance** – feedback UI, latency optimization
+6. **Testing & Release** – analytics, beta launch, infra scaling
+
+#### Sprint Breakdown (2-week sprints)
+
+**Sprint 1: Infra & Foundation**
+
+* Auth + profile setup
+* DB schemas (User, Session, Feed)
+* Dev environment setup
+* Onboarding UX mocks
+
+**Sprint 2: Camera Orchestration**
+
+* Device discovery + sync trigger
+* AR calibration overlay
+* Recording flow + preview
+* Upload pipeline setup
+
+**Sprint 3: AI Analysis MVP**
+
+* Multi-view pose estimation
+* Bar path modeling
+* Error detection for 3 faults
+* Feedback generation prototype
+
+**Sprint 4: Training Plan Builder**
+
+* Weekly plan logic
+* Drill suggestions from faults
+* Progress calendar view
+* Manual overrides
+
+**Sprint 5: UX & Performance Polish**
+
+* GIF feedback UI
+* Interactive error explorer
+* Latency tuning
+* Storage optimization
+
+**Sprint 6: QA + Closed Beta**
+
+* In-app telemetry
+* Privacy policies, GDPR support
+* Landing page + tester flow
+* Beta launch with 50 users
+
+---
+
+### 6 · Open Questions (v0.2)
+
+1. Should we ship a low-cost hardware bundle (tripods + LED sync puck) or rely on user-provided gear?
+2. Acceptable analysis-time trade-off: is ≤ 12 s sufficient, or do we target ≤ 8 s at higher infra cost?
+3. Do we support tablet + 2-phone setup (wider screens) as a variant?
+
+*End of PRD v0.2.*
